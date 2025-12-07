@@ -74,7 +74,7 @@ Where `{GAME_ID}` is the Game's id and `{GAME_EXE}` is the Game's executable. Th
 On the other hand, if you don't want to use VSCode, then you have to build it and run it manually with:
 
 ```shell
-mkdir build && cd build # ignore the first time
+mkdir build && cd build # only the first time
 cmake .. && make
 ./SunshineSteam {GAME_ID} {GAME_EXE}
 ```
