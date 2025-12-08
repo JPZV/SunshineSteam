@@ -1,0 +1,36 @@
+name: C++ Build
+
+on: [push, pull_request]
+
+jobs:
+  build-windows-64:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - name: Build with CMake
+        run: |
+          cmake -B build -S . -DCMAKE_CXX_STANDARD=17
+          cmake --build build --config Release
+      - name: Upload binary file
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: Windows-x64
+          path: |
+            build/Release/SunshineSteam.exe
+          if-no-files-found: error
+  
+  build-linux-64:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6.0.1
+      - name: Build with CMake
+        run: |
+          cmake -B build -S .
+          cmake --build build --config Release
+      - name: Upload binary file
+        uses: actions/upload-artifact@v5.0.0
+        with:
+          name: Linux-x64
+          path: |
+            build/SunshineSteam
+          if-no-files-found: error
