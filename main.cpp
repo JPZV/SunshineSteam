@@ -11,6 +11,7 @@
 // Project Includes
 #include "constants.hpp"
 #include "main.hpp"
+#include "main_windows.hpp"
 #include "process_monitor.hpp"
 #include "version.hpp"
 
@@ -55,6 +56,12 @@ int main(int argc, char *argv[])
         printf("ERROR: Couldn't install Control Handler\n");
         return 2;
     }
+    int dummy = StartDummyWindow([]()
+    {
+        printf("Main window was closed\n");
+        monitor->killAll();
+    });
+    if (dummy) return dummy;
 #endif
     signal(SIGINT, SignalHandler);
 
@@ -75,7 +82,11 @@ int main(int argc, char *argv[])
     }
 
     unsigned long findingTime = 0;
+#ifdef _WIN32
+    while (running && WindowLoop())
+#else
     while (running)
+#endif
     {
         if (!found && timeout_limit != 0 && ++findingTime > timeout_limit)
         {
@@ -83,6 +94,9 @@ int main(int argc, char *argv[])
             printf("Check the Game Executable path if the game did actually launched\n");
             return 4;
         }
+#ifdef _WIN32
+        if (!found)
+#endif
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 }
@@ -168,10 +182,9 @@ void PrintHelp()
 BOOL WINAPI CTRLHandler(DWORD dwType)
 {
     printf("Received control %d\n", dwType);
-    if (dwType == CTRL_C_EVENT)
+    if (dwType == CTRL_C_EVENT || dwType == CTRL_CLOSE_EVENT)
     {
         monitor->killAll();
-        return TRUE;
     }
     return FALSE;
 }

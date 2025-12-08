@@ -69,7 +69,7 @@ This depends of your setting and environment, but if you're using VSCode, you ne
 }
 ```
 
-Where `{GAME_ID}` is the Game's id and `{GAME_EXE}` is the Game's executable. Then you just need to press Shift+F5 to start debugging (keep in mind that CTRL+C may not work. If you want to test the close-the-game feature, you need to run the program from the console manually).
+Where `{GAME_ID}` is the Game's id and `{GAME_EXE}` is the Game's executable. Then you just need to press Shift+F5 to start debugging (keep in mind that CTRL+C may not work. If you want to test the close-the-game feature then you need to close the window if you're using Windows or run the program from the console manually if you're on Linux).
 
 On the other hand, if you don't want to use VSCode, then you have to build it and run it manually with:
 
@@ -82,4 +82,3 @@ cmake .. && make
 ## Known issues
 
 - Sometimes the streaming will not terminate when the game closes itself. This seems to happen when Steam re-open itselfs instead of using the already-opened instance.
-- SunshineSteam seems to not get the SIGIN when it's being closed from the client/moonlight at least on Windows.

@@ -4,6 +4,7 @@ project(sunshinesteam VERSION 0.1.0 LANGUAGES C CXX)
 # App
 
 add_executable(SunshineSteam main.cpp
+                             main_window.cpp
                              process_monitor.cpp)
 
 configure_file(
