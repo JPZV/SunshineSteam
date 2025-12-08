@@ -82,3 +82,4 @@ cmake .. && make
 ## Known issues
 
 - Sometimes the streaming will not terminate when the game closes itself. This seems to happen when Steam re-open itselfs instead of using the already-opened instance.
+- On SteamDeck (or Linux using Proton), if the GAME_EXE is set to proton, it'll falsely detect the game exits if it uses a launcher (like DDLC). A workaround for this is to set another process that is not necesarily the game's process
