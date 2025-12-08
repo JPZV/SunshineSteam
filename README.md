@@ -8,7 +8,7 @@ Currently this project only works in Windows and Linux (tested on Ubuntu, but it
 
 ## Installation
 
-Download the latest version available in the [Releases](https://github/JPZV/sunshinesteam/releases/latest) for your system and put it anywhere PATH is looking at (for example, `C:\Windows\System32` or `/usr/bin/`).
+Download the latest version available in the [Releases](https://github.com/JPZV/sunshinesteam/releases/latest) for your system and put it anywhere PATH is looking at (for example, `C:\Windows\System32` or `/usr/bin/`).
 
 ## Usage
 
