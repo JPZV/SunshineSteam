@@ -103,17 +103,17 @@ int main(int argc, char *argv[])
 
 bool ParseArgs(int argc, char *argv[])
 {
-    if (argc < 3)
-    {
-        PrintHelp();
-        return false;
-    }
     uint8_t currentArg = 0;
     for (uint8_t i = 1; i < argc; i++)
     {
         if (!strcmp(argv[i], "-h") || !strcmp(argv[i], "--help"))
         {
             PrintHelp();
+            return false;
+        }
+        else if (!strcmp(argv[i], "-l") || !strcmp(argv[i], "--list"))
+        {
+            monitor->printProcesses();
             return false;
         }
         else if (!strcmp(argv[i], "-t") || !strcmp(argv[i], "--timeout"))
@@ -173,6 +173,7 @@ void PrintHelp()
 #endif
     printf("\nOptions:\n");
     printf("\t-h    --help       Print this text\n");
+    printf("\t-l    --list       List current running processes and exit\n");
     printf("\t-t    --timeout    Set timeout in seconds for waiting the game to launch (0 to disable timeout)\n");
     printf("\t-v    --version    Print current version\n");
     printf("\nTip: Use your Task Manager to find the real GAME_EXE, as it's not always at the main directory\n");

@@ -64,7 +64,7 @@ void ProcessMonitor::loop()
 {
     while (running)
     {
-        auto procs = listProcesses();
+        auto procs = listProcesses(targetExe);
 
         unordered_map<int, bool> newSet;
         for (auto& [pid, path] : procs)
@@ -123,7 +123,7 @@ start_loop:
 }
 
 #ifdef _WIN32
-std::unordered_map<int, std::string> ProcessMonitor::listProcesses()
+std::unordered_map<int, std::string> ProcessMonitor::listProcesses(std::string target)
 {
     unordered_map<int, string> result;
 
@@ -145,7 +145,7 @@ std::unordered_map<int, std::string> ProcessMonitor::listProcesses()
                 if (QueryFullProcessImageNameA(hProc, 0, buffer, &size))
                 {
                     string p = toLowerCopy(std::filesystem::absolute(buffer).string());
-                    if (p == targetExe)
+                    if (target == "" || p == target)
                     {
                         result[pe.th32ProcessID] = p;
                     }
@@ -159,7 +159,7 @@ std::unordered_map<int, std::string> ProcessMonitor::listProcesses()
     return result;
 }
 #else
-std::unordered_map<int, std::string> ProcessMonitor::listProcesses()
+std::unordered_map<int, std::string> ProcessMonitor::listProcesses(std::string target)
 {
     unordered_map<int, string> result;
 
@@ -181,7 +181,7 @@ std::unordered_map<int, std::string> ProcessMonitor::listProcesses()
         buf[len] = 0;
         string path = std::filesystem::absolute(buf).string();
 
-        if (path == targetExe)
+        if (target == "" || path == target)
         {
             result[pid] = path;
         }
@@ -191,3 +191,12 @@ std::unordered_map<int, std::string> ProcessMonitor::listProcesses()
     return result;
 }
 #endif
+
+void ProcessMonitor::printProcesses()
+{
+    auto procs = listProcesses("");
+    for (auto& [pid, path] : procs)
+    {
+        printf("[%d] => %s\n", pid, path.c_str());
+    }
+}

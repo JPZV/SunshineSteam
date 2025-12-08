@@ -22,6 +22,7 @@ public:
     void stop();
 
     bool killAll();
+    void printProcesses();
 
     // Callbacks
     StartCallback onStart;
@@ -38,5 +39,5 @@ private:
     void loop();
 
     // OS-specific
-    std::unordered_map<int, std::string> listProcesses();
+    std::unordered_map<int, std::string> listProcesses(std::string target);
 };
