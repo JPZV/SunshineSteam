@@ -172,9 +172,9 @@ void PrintHelp()
     printf("Example: SunshineSteam 698780 \"/home/me/steam/steamapps/common/Doki Doki Literature Club/lib/linux-x86_64/DDLC\"\n");
 #endif
     printf("\nOptions:\n");
-    printf("\t-h\t--help\t\tPrint this text\n");
-    printf("\t-t\t--timeout\t\tSet timeout in seconds for waiting the game to launch (0 to disable timeout)\n");
-    printf("\t-v\t--version\t\tPrint current version\n");
+    printf("\t-h    --help       Print this text\n");
+    printf("\t-t    --timeout    Set timeout in seconds for waiting the game to launch (0 to disable timeout)\n");
+    printf("\t-v    --version    Print current version\n");
     printf("\nTip: Use your Task Manager to find the real GAME_EXE, as it's not always at the main directory\n");
 }
 
